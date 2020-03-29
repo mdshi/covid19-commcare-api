@@ -13,7 +13,7 @@
 	<version>0.0.1</version>
 	<packaging>${packaging.type}</packaging>
 	<name>covid19-rest</name>
-	<description>Data collection and surveilance</description>
+	<description>Data collection and surveillance</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -32,10 +32,10 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
 			<exclusions>
-				<exclusion>
-					<groupId>org.springframework.boot</groupId>
-					<artifactId>spring-boot-starter-tomcat</artifactId>
-				</exclusion>
+<!--				<exclusion>-->
+<!--					<groupId>org.springframework.boot</groupId>-->
+<!--					<artifactId>spring-boot-starter-tomcat</artifactId>-->
+<!--				</exclusion>-->
 				<exclusion>
 					<groupId>org.slf4j</groupId>
 					<artifactId>jul-to-slf4j</artifactId>
@@ -94,6 +94,17 @@
 		    <version>28.2-jre</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>42.2.10</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.2</version>
+		</dependency>
 	</dependencies>
 
 	<profiles>
@@ -148,26 +159,26 @@
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<plugins>
-			<plugin>
-			   <groupId>org.codehaus.mojo</groupId>
-			   <artifactId>exec-maven-plugin</artifactId>
-			   <version>1.6.0</version>
-			   <executions>
-				   <execution>
-					   <phase>validate</phase>
-					   <goals>
-						   <goal>exec</goal>
-					   </goals>
-				   </execution>
-			   </executions>
-			   <configuration>
-				   <executable>ng</executable>
-				   <workingDirectory>src/main/resources/covid19-case-reporting-WEB</workingDirectory>
-				   <arguments>
-					   <argument>build</argument>
-				   </arguments>
-			   </configuration>
-		   </plugin>
+<!--			<plugin>-->
+<!--			   <groupId>org.codehaus.mojo</groupId>-->
+<!--			   <artifactId>exec-maven-plugin</artifactId>-->
+<!--			   <version>1.6.0</version>-->
+<!--			   <executions>-->
+<!--				   <execution>-->
+<!--					   <phase>validate</phase>-->
+<!--					   <goals>-->
+<!--						   <goal>exec</goal>-->
+<!--					   </goals>-->
+<!--				   </execution>-->
+<!--			   </executions>-->
+<!--			   <configuration>-->
+<!--				   <executable>ng</executable>-->
+<!--				   <workingDirectory>src/main/resources/covid19-case-reporting-WEB</workingDirectory>-->
+<!--				   <arguments>-->
+<!--					   <argument>build</argument>-->
+<!--				   </arguments>-->
+<!--			   </configuration>-->
+<!--		   </plugin>-->
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
