@@ -13,7 +13,11 @@
 	<version>0.0.1</version>
 	<packaging>${packaging.type}</packaging>
 	<name>covid19-rest</name>
+<<<<<<< HEAD
 	<description>Data collection and surveillance</description>
+=======
+	<description>Data collection and surveilance</description>
+>>>>>>> 112155b85c5517eb9d3ee9ba0f6afa2aa4bdebea
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -169,6 +173,49 @@
 <!--			   </configuration>-->
 <!--		   </plugin>-->
 
+<<<<<<< HEAD
+=======
+			<!--<plugin>
+			   <groupId>org.codehaus.mojo</groupId>
+			   <artifactId>exec-maven-plugin</artifactId>
+			   <version>1.6.0</version>
+			   <executions>
+				   <execution>
+					   <phase>validate</phase>
+					   <goals>
+						   <goal>exec</goal>
+					   </goals>
+				   </execution>
+			   </executions>
+			   <configuration>
+				   <executable>ng</executable>
+				   <workingDirectory>src/main/resources/covid19-case-reporting-WEB</workingDirectory>
+				   <arguments>
+					   <argument>build</argument>
+				   </arguments>
+			   </configuration>
+		   </plugin>-->
+<plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <executions>
+                <execution>
+                    <phase>package</phase>
+                    <goals><goal>copy</goal></goals>
+                    <configuration>
+                        <artifactItems>
+                            <artifactItem>
+                                <groupId>com.heroku</groupId>
+                                <artifactId>webapp-runner</artifactId>
+                                <version>9.0.30.0</version>
+                                <destFileName>webapp-runner.jar</destFileName>
+                            </artifactItem>
+                        </artifactItems>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+>>>>>>> 112155b85c5517eb9d3ee9ba0f6afa2aa4bdebea
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>

@@ -61,27 +61,27 @@ paths:
         '500':
           $ref: '#/responses/response-internal-server-error-500'
   '/v1/facility':
-    put:
-      operationId: registerNewFacility
-      summary: 'Register new facility'
-      tags:
-        - HealthFacility
-      consumes:
-        - application/json
-      parameters:
-        - name: facilityData
-          in: body
-          schema:
-            $ref: '#/definitions/request-save-facility'
-      responses:
-        '200':
-          description: ''
-          schema:
-            $ref: '#/definitions/response-base'
-        '401':
-          $ref: '#/responses/response-unauthorized'
-        '500':
-          $ref: '#/responses/response-internal-server-error-500'
+      put:
+        operationId: registerNewFacility
+        summary: 'Register new facility'
+        tags:
+          - HealthFacility
+        consumes:
+          - application/json
+        parameters:
+          - name: facilityData
+            in: body
+            schema:
+              $ref: '#/definitions/request-save-facility'
+        responses:
+          '200':
+            description: ''
+            schema:
+              $ref: '#/definitions/response-base'
+          '401':
+            $ref: '#/responses/response-unauthorized'
+          '500':
+            $ref: '#/responses/response-internal-server-error-500'
   '/v1/case':
     put:
       operationId: registerNewCase
@@ -305,43 +305,57 @@ definitions:
         properties:
           jwtToken:
             type: string
-  model-health-facility:
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int32
-      osm_id:
-        type: integer
-        format: int64
-      name:
-        type: string
-      amenity:
-        type: string
-      addrfull:
-        type: string
-      xCord:
-        type: number
-      yCord:
-        type: number
-  model-case:
-    type: object
-    properties:
-      id:
-        type: integer
-        format: int32
-      caseCode:
-        type: string
-      firstName:
-        type: string
-      lastName:
-        type: string
-      dob:
-        type: string
-        format: date
-      gender:
-        type: string
-        enum:
+    jwt-request:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+    jwt-response:
+      allOf: 
+        - $ref: '#/definitions/response-base'
+        - type: object
+          properties:
+            jwtToken:
+              type: string
+    model-health-facility:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        osm_id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        amenity:
+          type: string
+        addrfull:
+          type: string
+        xCord:
+          type: number
+        yCord:
+          type: number
+    model-case:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        caseCode:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        dob:
+          type: string
+          format: date
+        gender:
+          type: string
+          enum:
           - F
           - M
       occupation:
@@ -574,6 +588,76 @@ definitions:
             $ref: '#/definitions/model-pui-follow-up-list'
   request-save-facility:
     allOf:
+      required:
+        - list
+    request-save-case:
+      allOf:
+        - $ref: '#/definitions/model-case'
+    request-save-questionnier:
+      allOf:
+        - $ref: '#/definitions/model-questionnier'
+    request-save-follow-up:
+      allOf:
+        - $ref: '#/definitions/request-save-case'
+        - $ref: '#/definitions/model-pui-follow-up-list'
+    response-case-single:
+      allOf:
+        - $ref: '#/definitions/response-base'
+        - type: object
+          properties:
+            returnValue:
+              $ref: '#/definitions/model-case'
+    response-case-list:
+      allOf:
+        - $ref: '#/definitions/response-base'
+        - type: object
+          properties:
+            returnValue:
+              $ref: '#/definitions/model-case-list'
+    response-questionnier-single:
+      allOf:
+        - $ref: '#/definitions/response-base'
+        - type: object
+          properties:
+            returnValue:
+              $ref: '#/definitions/model-questionnier'
+    response-questionnier-list:
+      allOf:
+        - $ref: '#/definitions/response-base'
+        - type: object
+          properties:
+            returnValue:
+              $ref: '#/definitions/model-questionnier-list'
+    response-attribute:
+      allOf:
+        - $ref: '#/definitions/response-base'
+        - type: object
+          properties:
+            returnValue:
+              $ref: '#/definitions/model-attribute'
+    response-attributes-list:
+      allOf:
+        - $ref: '#/definitions/response-base'
+        - type: object
+          properties:
+            returnValue:
+              $ref: '#/definitions/model-attribute-list'
+    response-pui-follow-up-single:
+      allOf:
+        - $ref: '#/definitions/response-base'
+        - type: object
+          properties:
+            returnValue:
+              $ref: '#/definitions/model-pui-follow-up'
+    response-pui-follow-up-list:
+      allOf:
+        - $ref: '#/definitions/response-base'
+        - type: object
+          properties:
+            returnValue:
+              $ref: '#/definitions/model-pui-follow-up-list'
+    request-save-facility:
+      allOf:
       - $ref: '#/definitions/model-health-facility'
 responses:
   response-internal-server-error-500:
