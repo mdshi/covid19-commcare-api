@@ -1,0 +1,35 @@
+#==== spring related ======#
+spring:
+   profiles:
+      active: dev
+   application:
+    name: covid19-Rest
+
+#==== connect to mysql ======#
+   jpa: 
+      hibernate:
+         ddl-auto: create
+      properties.hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+   datasource:
+      url: jdbc:postgresql://localhost:5432/covid19_rest
+      username: postgres
+      password: password
+      driver-class-name: org.postgresql.Driver
+
+#====== security ======# < ----------------------------- important?
+   security:
+      basic:
+         enabled: true
+      user:
+         password: password
+
+# ====== hibernate ====
+#logging.level.org.hibernate.SQL=TRACE
+#logging.level.org.hibernate.type=debug
+
+
+#logging:
+#   level:
+#      org.hibernate.SQL: TRACE
+#      org.hibernate.type: debug
+#      org.springframework.security: DEBUG
